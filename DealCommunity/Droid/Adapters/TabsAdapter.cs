@@ -19,7 +19,10 @@ namespace DealCommunity.Droid.Adapters
 
         public override Fragment GetItem(int position)
         {
-            return BrowseFragment.NewInstance();
+            if (position == 1)
+                return AboutFragment.NewInstance();
+            else
+                return BrowseFragment.NewInstance();
         }
 
         public override int GetItemPosition(Java.Lang.Object frag) => PositionNone;

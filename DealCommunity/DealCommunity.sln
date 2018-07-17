@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DealCommunity.iOS", "iOS\De
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DealCommunity.Droid", "Droid\DealCommunity.Droid.csproj", "{76A2F2F2-4029-4DD0-B2AC-EBC62CEBBA7B}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DealCommunityShared", "DealCommunityShared\DealCommunityShared.shproj", "{CFCE7BAB-501D-4489-AA23-C86C55A4E48F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator

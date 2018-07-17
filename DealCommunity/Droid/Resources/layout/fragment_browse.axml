@@ -13,6 +13,8 @@
             android:layout_height="wrap_content"
             android:background="@color/accent"
             android:paddingTop="5dp"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true"
             android:paddingBottom="5dp">
             <EditText
                 android:id="@+id/product_search"
