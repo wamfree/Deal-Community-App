@@ -6,7 +6,7 @@ namespace DealCommunity.iOS
 {
     public partial class ItemNewViewController : UIViewController
     {
-        public ProductsViewModel ViewModel { get; set; }
+        public ProductViewModel ViewModel { get; set; }
 
         public ItemNewViewController(IntPtr handle) : base(handle)
         {

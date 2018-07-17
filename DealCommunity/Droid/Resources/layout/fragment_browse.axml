@@ -1,7 +1,53 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent">
-    <android.support.v4.widget.SwipeRefreshLayout android:layout_width="match_parent" android:layout_height="fill_parent" android:id="@+id/refresher">
-        <android.support.v7.widget.RecyclerView android:id="@+id/recyclerView" android:scrollbars="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" app:layoutManager="GridLayoutManager" android:paddingTop="12dp" />
-    </android.support.v4.widget.SwipeRefreshLayout>
-    <ProgressBar android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_gravity="center" android:id="@+id/progressbar_loading" android:indeterminate="true" />
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/accent"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+            <EditText
+                android:id="@+id/product_search"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:background="@drawable/edit_text_style"
+                android:hint="Search by name or description"
+                android:singleLine="true"
+                android:textColor="#000" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linear_layout_container"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingBottom="66dp">
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/refresher">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:scrollbars="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    app:layoutManager="GridLayoutManager"
+                    android:paddingTop="12dp" />
+            </android.support.v4.widget.SwipeRefreshLayout>
+            <ProgressBar
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/progressbar_loading"
+                android:indeterminate="true" />
+        </LinearLayout>
+    </LinearLayout>
 </FrameLayout>

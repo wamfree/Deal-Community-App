@@ -149,7 +149,6 @@
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Main.storyboard" />
   </ItemGroup>
-  <Import Project="..\DealCommunityShared\DealCommunityShared.projitems" Label="Shared" Condition="Exists('..\DealCommunityShared\DealCommunityShared.projitems')" />
   <Import Project="..\DealCommunity\DealCommunity.projitems" Label="Shared" Condition="Exists('..\DealCommunity\DealCommunity.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

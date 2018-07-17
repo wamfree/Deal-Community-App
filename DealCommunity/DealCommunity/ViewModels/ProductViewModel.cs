@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace DealCommunity
 {
-    public class ProductsViewModel : BaseViewModel
+    public class ProductViewModel : BaseViewModel
     {
         public ObservableCollection<Product> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
         public Command AddItemCommand { get; set; }
 
-        public ProductsViewModel()
+        public ProductViewModel()
         {
             Title = "Products";
             Items = new ObservableCollection<Product>();

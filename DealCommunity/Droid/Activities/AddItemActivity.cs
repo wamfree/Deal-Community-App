@@ -13,7 +13,7 @@ namespace DealCommunity.Droid
         FloatingActionButton saveButton;
         EditText title, description;
 
-        public ProductsViewModel ViewModel { get; set; }
+        public ProductViewModel ViewModel { get; set; }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {

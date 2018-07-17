@@ -4,11 +4,15 @@ using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using Android.Support.V4.Widget;
-using Android.App;
 using Android.Content;
+using System.Linq;
+using System.Collections.ObjectModel;
+using DealCommunity.Droid.Adapters;
+using Android.Views.InputMethods;
 
 namespace DealCommunity.Droid
 {
+
     public class BrowseFragment : Android.Support.V4.App.Fragment, IFragmentVisible
     {
         public static BrowseFragment NewInstance() =>
@@ -16,9 +20,13 @@ namespace DealCommunity.Droid
 
         BrowseItemsAdapter adapter;
         SwipeRefreshLayout refresher;
-
+        EditText productSearch;
+        RecyclerView recyclerView;
+        ObservableCollection<Product> originalItems;
         ProgressBar progress;
-        public static ProductsViewModel ViewModel { get; set; }
+
+
+        public static ProductViewModel ViewModel { get; set; }
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -29,11 +37,11 @@ namespace DealCommunity.Droid
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            ViewModel = new ProductsViewModel();
+            ViewModel = new ProductViewModel();
+            originalItems = ViewModel.Items;
 
             View view = inflater.Inflate(Resource.Layout.fragment_browse, container, false);
-            var recyclerView =
-                view.FindViewById<RecyclerView>(Resource.Id.recyclerView);
+            recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerView);
 
             recyclerView.HasFixedSize = true;
             recyclerView.SetAdapter(adapter = new BrowseItemsAdapter(Activity, ViewModel));
@@ -44,8 +52,45 @@ namespace DealCommunity.Droid
             progress = view.FindViewById<ProgressBar>(Resource.Id.progressbar_loading);
             progress.Visibility = ViewStates.Gone;
 
+            productSearch = view.FindViewById<EditText>(Resource.Id.product_search);
+            productSearch.TextChanged += OnProductSearchTextChanged;
+            productSearch.KeyPress += OnProductSearchTyped;
+           
+
             return view;
         }
+
+        void OnProductSearchTyped(object sender, View.KeyEventArgs e)
+        {
+            if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
+            {
+                e.Handled = true;
+                DismissKeyboard();
+            }
+            else
+                e.Handled = false;
+        }
+
+        private void DismissKeyboard()
+        {
+            if (productSearch != null)
+            {
+                InputMethodManager imm = (InputMethodManager)Activity.GetSystemService(Context.InputMethodService);
+                imm.HideSoftInputFromWindow(productSearch.WindowToken, 0);
+            }
+        }
+
+        private void OnProductSearchTextChanged(object sender, Android.Text.TextChangedEventArgs e)
+        {
+            var productList = (from item in originalItems
+                               where item.Name.Contains(productSearch.Text) || item.Description.Contains(productSearch.Text)
+                               select item).ToList<Product>();
+
+            ViewModel.Items = new ObservableCollection<Product>(productList);
+
+            recyclerView.SetAdapter(adapter = new BrowseItemsAdapter(Activity, ViewModel));
+            adapter.ItemClick += Adapter_ItemClick;
+        } 
 
         public override void OnStart()
         {
@@ -84,62 +129,9 @@ namespace DealCommunity.Droid
         {
 
         }
+
+
     }
 
-    class BrowseItemsAdapter : BaseRecycleViewAdapter
-    {
-        ProductsViewModel viewModel;
-        Activity activity;
 
-        public BrowseItemsAdapter(Activity activity, ProductsViewModel viewModel)
-        {
-            this.viewModel = viewModel;
-            this.activity = activity;
-
-            this.viewModel.Items.CollectionChanged += (sender, args) =>
-            {
-                this.activity.RunOnUiThread(NotifyDataSetChanged);
-            };
-        }
-
-        // Create new views (invoked by the layout manager)
-        public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
-        {
-            //Setup your layout here
-            View itemView = null;
-            var id = Resource.Layout.item_browse;
-            itemView = LayoutInflater.From(parent.Context).Inflate(id, parent, false);
-
-            var vh = new MyViewHolder(itemView, OnClick, OnLongClick);
-            return vh;
-        }
-
-        // Replace the contents of a view (invoked by the layout manager)
-        public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
-        {
-            var item = viewModel.Items[position];
-
-            // Replace the contents of the view with that element
-            var myHolder = holder as MyViewHolder;
-            myHolder.TextView.Text = item.Name;
-            myHolder.DetailTextView.Text = item.Description;
-        }
-
-        public override int ItemCount => viewModel.Items.Count;
-    }
-
-    public class MyViewHolder : RecyclerView.ViewHolder
-    {
-        public TextView TextView { get; set; }
-        public TextView DetailTextView { get; set; }
-
-        public MyViewHolder(View itemView, Action<RecyclerClickEventArgs> clickListener,
-                            Action<RecyclerClickEventArgs> longClickListener) : base(itemView)
-        {
-            TextView = itemView.FindViewById<TextView>(Android.Resource.Id.Text1);
-            DetailTextView = itemView.FindViewById<TextView>(Android.Resource.Id.Text2);
-            itemView.Click += (sender, e) => clickListener(new RecyclerClickEventArgs { View = itemView, Position = AdapterPosition });
-            itemView.LongClick += (sender, e) => longClickListener(new RecyclerClickEventArgs { View = itemView, Position = AdapterPosition });
-        }
-    }
 }

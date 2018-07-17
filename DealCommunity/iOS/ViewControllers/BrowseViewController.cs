@@ -10,7 +10,7 @@ namespace DealCommunity.iOS
     {
         UIRefreshControl refreshControl;
 
-        public ProductsViewModel ViewModel { get; set; }
+        public ProductViewModel ViewModel { get; set; }
 
         public BrowseViewController(IntPtr handle) : base(handle)
         {
@@ -20,7 +20,7 @@ namespace DealCommunity.iOS
         {
             base.ViewDidLoad();
 
-            ViewModel = new ProductsViewModel();
+            ViewModel = new ProductViewModel();
 
             // Setup UITableView.
             refreshControl = new UIRefreshControl();
@@ -94,9 +94,9 @@ namespace DealCommunity.iOS
     {
         static readonly NSString CELL_IDENTIFIER = new NSString("ITEM_CELL");
 
-        ProductsViewModel viewModel;
+        ProductViewModel viewModel;
 
-        public ItemsDataSource(ProductsViewModel viewModel)
+        public ItemsDataSource(ProductViewModel viewModel)
         {
             this.viewModel = viewModel;
         }

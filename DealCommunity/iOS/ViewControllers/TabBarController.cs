@@ -7,7 +7,7 @@ namespace DealCommunity.iOS
     {
         public TabBarController(IntPtr handle) : base(handle)
         {
-            TabBar.Items[0].Title = "Browse";
+            TabBar.Items[0].Title = "Products";
             TabBar.Items[1].Title = "About";
         }
     }
