@@ -82,7 +82,7 @@ namespace DealCommunity.Droid
         private void OnProductSearchTextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
             var productList = (from item in originalItems
-                               where item.Name.Contains(productSearch.Text) || item.Description.Contains(productSearch.Text)
+                               where item.Name.ToLower().Contains(productSearch.Text.ToLower()) || item.Description.ToLower().Contains(productSearch.Text.ToLower())
                                select item).ToList<Product>();
 
             ViewModel.Items = new ObservableCollection<Product>(productList);
