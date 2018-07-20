@@ -178,6 +178,8 @@
     <AndroidResource Include="Resources\drawable\edit_text_style.xml" />
     <AndroidResource Include="Resources\drawable\ic_action_search.png" />
     <AndroidResource Include="Resources\menu\actionbar.xml" />
+    <AndroidResource Include="Resources\drawable\icon.png" />
+    <AndroidResource Include="Resources\drawable\oprea_logo.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />

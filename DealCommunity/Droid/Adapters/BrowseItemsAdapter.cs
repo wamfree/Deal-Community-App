@@ -1,6 +1,10 @@
-﻿using Android.App;
+﻿using System.Net;
+using Android.App;
+using Android.Graphics;
+using Android.Media;
 using Android.Support.V7.Widget;
 using Android.Views;
+using Android.Widget;
 using DealCommunity.Droid.Views;
 
 namespace DealCommunity.Droid.Adapters
@@ -42,9 +46,33 @@ namespace DealCommunity.Droid.Adapters
             var myHolder = holder as BrowseViewHolder;
             myHolder.TextView.Text = item.Name;
             myHolder.DetailTextView.Text = item.Description;
-            myHolder.CounterView.Text = (position+1).ToString();
+            myHolder.CounterView.Text = "CHF\n" + item.Price;
+            myHolder.ReleaseDate.Text = "Release date: " + item.ReleaseDate;
+            float starsValue;
+            float.TryParse(item.StarRating, out starsValue);
+            myHolder.RatingStars.Rating = starsValue;
+            myHolder.RatingStars.NumStars = 5;
+                    
+            var imageBitmap = GetImageBitmapFromUrl(item.ImageUrl);
+            myHolder.ProductPictureView.SetImageBitmap(imageBitmap);
         }
 
         public override int ItemCount => viewModel.Items.Count;
+
+        private Bitmap GetImageBitmapFromUrl(string url)
+        {
+            Bitmap imageBitmap = null;
+
+            using (var webClient = new WebClient())
+            {
+                var imageBytes = webClient.DownloadData(url);
+                if (imageBytes != null && imageBytes.Length > 0)
+                {
+                    imageBitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
+                }
+            }
+
+            return imageBitmap;
+        }
     }
 }

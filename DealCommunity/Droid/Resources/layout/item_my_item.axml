@@ -4,17 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:foreground="?attr/selectableItemBackground"
-    android:layout_height="wrap_content"
+    android:layout_height="180dp"
     android:layout_marginLeft="12dp"
     android:layout_marginRight="12dp"
     android:layout_marginBottom="12dp">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/product_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="@dimen/disabled_alpha_material_light"
+            android:layout_gravity="center" />
         <TextView
             android:id="@+id/item_count"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:background="@drawable/circle_background"
             android:textColor="@android:color/white"
             android:gravity="center"
@@ -34,15 +40,37 @@
             style="?android:textAppearanceMedium"
             tools:text="Title 1"
             android:layout_toEndOf="@id/item_count" />
+        <RatingBar
+            android:id="@+id/rating_bar"
+            android:rating="0"
+            android:numStars="5"
+            android:stepSize="1.0"
+            android:layout_margin="5dp"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/item_count"
+            android:layout_below="@android:id/text1" />
         <TextView
             android:id="@android:id/text2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/item_count"
-            android:layout_below="@android:id/text1"
+            android:layout_below="@id/rating_bar"
             android:padding="@dimen/small_margin"
             android:ellipsize="end"
             android:maxLines="4"
+            style="?android:textAppearanceSmall"
+            tools:text="Description goes here" />
+        <TextView
+            android:id="@+id/release_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/item_count"
+            android:layout_below="@id/rating_bar"
+            android:paddingTop="70dp"
+            android:paddingLeft="@dimen/small_margin"
+            android:maxLines="2"
             style="?android:textAppearanceSmall"
             tools:text="Description goes here" />
     </RelativeLayout>

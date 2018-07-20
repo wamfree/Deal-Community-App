@@ -8,7 +8,7 @@ namespace DealCommunity
         {
             Title = "About";
 
-            OpenWebCommand = new Command(() => Plugin.Share.CrossShare.Current.OpenBrowser("https://xamarin.com/platform"));
+            OpenWebCommand = new Command(() => Plugin.Share.CrossShare.Current.OpenBrowser("https://www.linkedin.com/in/tiberiuoprea"));
         }
 
         public ICommand OpenWebCommand { get; }

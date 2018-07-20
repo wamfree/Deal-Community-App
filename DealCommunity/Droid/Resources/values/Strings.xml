@@ -3,7 +3,7 @@
     <string name="hello">Hello World, Click Me!</string>
     <string name="app_name">DealCommunity</string>
     <string name="tab1">Products</string>
-    <string name="tab2">About This App</string>
+    <string name="tab2">About</string>
     <string name="signin">Sign In</string>
     <string name="notnow">Not Now</string>
     <string name="signing_in">Signing in...</string>

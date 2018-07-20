@@ -23,9 +23,6 @@ namespace DealCommunity.Droid
         TabsAdapter adapter;
         ProductViewModel viewModel;
         EditText productSearch;
-        private LinearLayout linear_layout_container;
-        private bool mAnimatedDown;
-        private bool mIsAnimating;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -57,15 +54,5 @@ namespace DealCommunity.Droid
             SupportActionBar.SetDisplayHomeAsUpEnabled(false);
             SupportActionBar.SetHomeButtonEnabled(false);
         }
-
-        //public override bool OnCreateOptionsMenu(IMenu menu)
-        //{
-        //    MenuInflater.Inflate(Resource.Menu.actionbar, menu);
-        //    return base.OnCreateOptionsMenu(menu);
-        //}
-
-
     }
-
-
 }

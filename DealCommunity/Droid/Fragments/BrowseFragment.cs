@@ -56,7 +56,6 @@ namespace DealCommunity.Droid
             productSearch.TextChanged += OnProductSearchTextChanged;
             productSearch.KeyPress += OnProductSearchTyped;
            
-
             return view;
         }
 
@@ -125,13 +124,6 @@ namespace DealCommunity.Droid
             refresher.Refreshing = false;
         }
 
-        public void BecameVisible()
-        {
-
-        }
-
-
+        public void BecameVisible(){}
     }
-
-
 }
